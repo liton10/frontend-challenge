@@ -1,0 +1,14 @@
+// Header
+//
+// Markup: header.twig
+//
+// Style guide: 6.5
+
+$chroma: add-colors('primary', (
+    header-text-color: 'blue',
+));
+
+.header{
+  color: color(header-text-color);
+  @include typeset(extra-large);
+}

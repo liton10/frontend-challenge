@@ -1,0 +1,35 @@
+// Search
+//
+// Markup: search.twig
+//
+// Style guide: 6.4
+
+$chroma: add-colors('primary', (
+    search-container-input-bg: 'grey-xxlight'
+));
+
+.search-container {
+  display: inline-block;
+  position: relative;
+
+}
+
+.search-container__input {
+  padding: $spacing-s;
+  padding-right: $spacing-m;
+  width: $input-max-width;
+  border: 0;
+  border-radius: $border-radius;
+  background-color: color(search-container-input-bg);
+}
+
+.search-container__submit {
+  border: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  width: $spacing-m;
+  height: 100%;
+  position: absolute;
+  background: url('/images/search.svg') no-repeat center;
+}

@@ -59,6 +59,10 @@ let cleanFiles = {
     '!' + config.sass.dest + '/style-guide/**/*.css'
   ],
 
+  js: [
+    config.js.dest + '/**/*.js'
+  ],
+
   styleguide: [
     config.styleguide.dest + '/*.html',
     config.styleguide.dest + '/kss-assets',
@@ -198,6 +202,16 @@ cleanCss.description = 'Clean the SASS destination directory.';
 gulp.task('clean:css', cleanCss);
 
 /**
+ * Clean the js destination directory.
+ */
+const cleanJs = function() {
+  return del(cleanFiles.js, { force: true });
+};
+
+cleanJs.description = 'Clean the js destination directory.';
+gulp.task('clean:js', cleanJs);
+
+/**
  * Clean the styleguide directory and remove any related styleguide files.
  */
 const cleanStyleguide = function() {
@@ -277,10 +291,34 @@ const kssBuild = function() {
 kssBuild.description = 'Builds the style guide.';
 gulp.task('styleguide:build', kssBuild);
 
+
+/**
+ * Copy over images.
+ */
+const copyImages = function() {
+  return gulp.src(config.images.src)
+    .pipe(gulp.dest(config.images.dest));
+};
+
+copyImages.description = 'Copying images to dist.';
+gulp.task('copy:images', copyImages);
+
+
+/**
+ * Copy over javascript files.
+ */
+const copyJs = function() {
+  return gulp.src(config.js.src + '/**/*.js')
+    .pipe(gulp.dest(config.js.dest));
+};
+
+copyJs.description = 'Copying JS files to dist.';
+gulp.task('copy:js', copyJs);
+
 /**
  * Run all styleguide tasks in the correct order.
  */
-const styleguide = gulp.series('clean:styleguide', 'styleguide:chroma-kss-markup', gulp.parallel('styleguide:styles', 'styleguide:build'));
+const styleguide = gulp.series('clean:styleguide', 'styleguide:chroma-kss-markup', gulp.parallel('styleguide:styles', 'styleguide:build'), 'copy:images', 'copy:js');
 styleguide.description = 'Builds the style guide and compiles sass/styleguide and Chroma markup.';
 gulp.task('styleguide', styleguide);
 

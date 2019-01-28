@@ -1,0 +1,29 @@
+// Menu
+//
+// Markup: menu.twig
+//
+// Style guide: 6.3
+
+$chroma: add-colors('primary', (
+  anchor-color:       'blue',
+  anchor-active-color: 'blue-light',
+));
+
+.menu{
+  list-style-type: none;
+  margin: 0;
+  padding: $spacing-s 0;
+  overflow: hidden;
+}
+
+.menu__list{
+  display: inline-block;
+  a{
+    color: color(anchor-color);
+    text-decoration: none;
+    margin-right: $spacing-m;
+  }
+  a:hover {
+    color: color(anchor-active-color);
+  }
+}

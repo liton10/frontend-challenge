@@ -1,0 +1,47 @@
+// Accordion
+//
+// Markup: accordion.twig
+//
+// Style guide: 6.6
+
+$chroma: add-colors('primary', (
+  accordion-bg: 'blue-light',
+  accordion-text: 'black'
+));
+
+$accordion-padding: 18px;
+
+.accordion {
+  padding: $accordion-padding;
+}
+
+.accordion_heading {
+  background-color: color(accordion-bg);
+  color: color(accordion-text);
+  cursor: pointer;
+  padding: $accordion-padding;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  @include typeset(large);
+  transition: 0.4s;
+	&:after{
+	  content : url("/images/chevron-down.svg");
+	  font-weight: bold;
+	  float: right;
+	}
+}
+
+.active:after {
+  content : url("/images/chevron-down.svg");
+  transform: rotate(180deg);
+}
+
+.accordion_body {
+  padding: 0 $accordion-padding;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
+}
+
